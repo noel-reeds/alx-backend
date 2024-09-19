@@ -12,4 +12,4 @@ How to the build a basic Express app interacting with a Redis server and queue.
 [Redis quick start](https://redis.io/docs/latest/integrate/)  
 [Redis clint interface](https://redis.io/docs/latest/develop/connect/cli/)  
 [Redis client for Node JS](https://github.com/redis/node-redis)  
-[Kue](https://github.com/Automattic/kue)_deprecated but still use in the industry_
+[kue](https://github.com/Automattic/kue) _deprecated but still use in the industry_  
