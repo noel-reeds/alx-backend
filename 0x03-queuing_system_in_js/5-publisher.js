@@ -4,7 +4,7 @@ const client = createClient()
 	.on('connect', () => console.log('Redis client connected to the server'))
 	.on('error', (err) => console.log(`Redis client not connected to the server: ${err.message}`));
 
-const publishMessage = (message, time, (err, reply) => {
+const publishMessage = (channel, message) => {
 	if (err){
 		console.error(err);
 	} else {

@@ -1,4 +1,4 @@
-dump.rdb
+*.rdb
 redis-cli
 redis-server
 *.gz

@@ -13,13 +13,12 @@ client.on('error', (err) => {
 client.subscribe('holberton school channel');
 
 client.on('message', (channel, message) => {
-  console.log(`Received message: ${message}`);
 
   if (message === 'KILL_SERVER') {
-    client.unsubscribe(channel, () => {
-      console.log(`Unsubscribed from channel: ${channel}`);
-      client.quit();
-    });
-  }
+    client.unsubscribe(channel);
+    client.quit();
+	} else {
+		console.log(message);
+	}
 });
 
