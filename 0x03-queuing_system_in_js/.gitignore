@@ -1,3 +1,6 @@
+dump.rdb
+redis-cli
+redis-server
 *.gz
 node_modules/
 package.json
