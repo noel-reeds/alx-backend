@@ -6,4 +6,4 @@ package.json
 package-lock.json
 redis-6.0.10/
 .babelrc
-dump.rdb
+*.rdb
