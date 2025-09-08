@@ -52,7 +52,7 @@ class Server:
             'page_size': page_size,
             'page': page,
             'data': self.get_page(page, page_size),
-            'next_page': page+1 if ln_lst >= page * page_size else None,
-            'prev_page': page-1 if ln_lst >= (page-1) * page_size else None,
+            'next_page': page + 1 if ln_lst >= page * page_size else None,
+            'prev_page': None if page == 1 else page - 1,
             'total_pages': ln_lst
             }
