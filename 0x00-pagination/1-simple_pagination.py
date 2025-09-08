@@ -42,4 +42,4 @@ class Server:
         lst = self.dataset()
         if end > (ln_lst := len(lst)):
             return []
-        return lst[start:end-1]
+        return lst[start:end]
