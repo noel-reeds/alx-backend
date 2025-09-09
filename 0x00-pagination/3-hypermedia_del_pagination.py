@@ -70,6 +70,7 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """deletion-resilient hypermedia pagination"""
+        d_lst = self.dataset()
         assert index in self.indexed_dataset().keys()
         items_from_0 = index + page_size
         page = items_from_0 / page_size
@@ -77,5 +78,5 @@ class Server:
             'index': index,
             'next_index': index + page_size,
             'page_size': page_size,
-            'data': self.get_page(page, page_size)
+            'data': [d_lst[i] for i in range(index, index + page_size)]
         }
