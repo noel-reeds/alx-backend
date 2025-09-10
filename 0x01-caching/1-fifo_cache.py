@@ -13,7 +13,9 @@ class FIFOCache(BaseCaching):
         """Assigns item to a key in cached data"""
         d_cache = self.cache_data
         if key and item:
-            if len(d_cache) > BaseCaching.MAX_ITEMS:
+            if key in self.cache_data.keys():
+                return
+            elif len(d_cache) >= BaseCaching.MAX_ITEMS:
                 first_in = list(d_cache)[0]
                 # discard first item added
                 value = d_cache.pop(first_in)
