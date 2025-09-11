@@ -39,7 +39,8 @@ class LRUCache(BaseCaching):
             if (lru_counter := getattr(self, 'lru_counter', None)) is None:
                 self.lru_counter = defaultdict(int)
             key = args[0]
-            self.lru_counter[key] += 1
+            if key in self.cache_data.keys():
+                self.lru_counter[key] += 1
             return fn(self, *args, **kwargs)
         return wrapper
 
