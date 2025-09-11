@@ -26,7 +26,9 @@ class LRUCache(BaseCaching):
                     if (v := counter.get(k)) < lru_v:
                         lru_v = v
                         lru_k = k
-                lru_v = d_cache.pop(lru_k)
+                # update counter & cache
+                counter.pop(lru_k)
+                d_cache.pop(lru_k)
                 print(f"DISCARD: {lru_k}")
             d_cache[key] = item
 
@@ -38,7 +40,7 @@ class LRUCache(BaseCaching):
                 self.lru_counter = defaultdict(int)
             key = args[0]
             self.lru_counter[key] += 1
-            return fn(*args, **kwargs)
+            return fn(self, *args, **kwargs)
         return wrapper
 
     @counted
