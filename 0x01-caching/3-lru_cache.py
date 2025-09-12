@@ -25,7 +25,8 @@ class LRUCache(BaseCaching):
                 lru_k = list(counter)[0]
                 lru_v = counter.get(lru_k)
                 for k in counter.keys():
-                    if (v := counter.get(k)) < lru_v:
+                    v = counter.get(k)
+                    if v < lru_v:
                         lru_v = v
                         lru_k = k
                 # update counter & cache
