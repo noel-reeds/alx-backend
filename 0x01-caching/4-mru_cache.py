@@ -21,12 +21,13 @@ class MRUCache(BaseCaching):
                 return
             elif len(cache) >= BaseCaching.MAX_ITEMS:
                 # discard the most recently used - mru
-                if self.mru and self.mru in cache.keys():
+                if self.mru in cache.keys():
                     cache.pop(self.mru)
                     print(f"DISCARD: {self.mru}")
                 else:
                     # if None, remove first item in cache
-                    cache.popitem()
+                    k, v = cache.popitem()
+                    print(f"DISCARD: {k}")
             cache[key] = item
 
     def counted(fn):
