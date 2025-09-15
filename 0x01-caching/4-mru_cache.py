@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """LRU Caching"""
 from collections import defaultdict
+from typing import Callable, Union
 from functools import wraps
 BaseCaching = __import__('base_caching').BaseCaching
 
@@ -12,7 +13,7 @@ class MRUCache(BaseCaching):
         BaseCaching.__init__(self)
         self.mru = None
 
-    def put(self, key, item):
+    def put(self, key: str, item: int) -> None:
         """Assigns key to item in cache"""
         cache = self.cache_data
         if key and item:
@@ -30,7 +31,7 @@ class MRUCache(BaseCaching):
                     print(f"DISCARD: {k}")
             cache[key] = item
 
-    def counted(fn):
+    def counted(fn: Callable[[str], Union[int, None]]) -> Callable:
         """Keeps track of get fn calls"""
         @wraps(fn)
         def wrapper(self, *args, **kwargs):
@@ -41,7 +42,7 @@ class MRUCache(BaseCaching):
         return wrapper
 
     @counted
-    def get(self, key):
+    def get(self, key: str) -> Union[int, None]:
         """return the value linked to key"""
         if key in self.cache_data.keys():
             return self.cache_data[key]
