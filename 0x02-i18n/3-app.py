@@ -2,11 +2,13 @@
 """Get locale from request"""
 from flask import request, Flask, render_template
 from flask_babel import Babel
-app = __import__('1-app').app
+conf = __import__('1-app').Config
 
 
 app = Flask(__name__)
+app.config.from_object(conf)
 babel = Babel(app)
+
 
 @babel.localeselector
 def get_locale():
