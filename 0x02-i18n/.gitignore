@@ -1,4 +1,3 @@
 .i18n/
 messages.pot
 __pycache__/
-babel.cfg
