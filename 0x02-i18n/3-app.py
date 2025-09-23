@@ -15,6 +15,7 @@ def get_locale():
     """Retrieves lang-setting"""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 @app.route("/")
 def index():
     """Renders a page"""
