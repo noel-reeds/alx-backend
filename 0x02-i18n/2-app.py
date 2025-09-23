@@ -3,6 +3,7 @@
 from flask import request, Flask, render_template
 from flask_babel import Babel
 app = __import__('1-app').app
+babel = __import__('1-app').babel
 
 
 @babel.localeselector
