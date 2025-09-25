@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Get locale from request"""
 from typing import Optional, Dict
-from flask import _, g, request, Flask, render_template
-from flask_babel import Babel
+from flask import g, request, Flask, render_template
+from flask_babel import _, Babel
 conf = __import__('1-app').Config
 
 
@@ -19,18 +19,24 @@ app.config.from_object(conf)
 babel = Babel(app)
 
 
-@app.before_request
 def get_user() -> Optional[Dict]:
     """Mock logging in"""
     try:
         user_id = int(request.args.get("login_as"))
         if user_id in users.keys():
-            g.user = users.get(user_id)
-            return g.user
+            return users.get(user_id)
         return None
     except Exception as error:
         print(_("Not a valid number!"))
         return None
+
+
+@app.before_request
+def before_request():
+    """Executed before all other functions."""
+    user = get_user()
+    if user:
+        g.__setattr__("user", user)
 
 
 @babel.localeselector
@@ -46,8 +52,9 @@ def get_locale() -> Optional[str]:
 def index() -> str:
     """Renders a page"""
     (name := g.user.get('name') if hasattr(g, "user") else None)
-    return render_template("4-index.html", user_name=name)
+    return render_template("5-index.html", username=name)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
