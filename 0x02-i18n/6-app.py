@@ -2,6 +2,7 @@
 """Get locale from request"""
 import os
 import ctypes
+import locale
 from typing import Optional, Dict
 from flask import g, request, Flask, render_template
 from flask_babel import _, Babel
@@ -44,14 +45,11 @@ def before_request():
 @babel.localeselector
 def get_locale() -> Optional[str]:
     """Retrieves lang-setting"""
-    url_locale = request.args.get("locale")
+    ur_locale = request.args.get("locale")
     if url_locale in app.config['LANGUAGES']:
         return url_locale
-    if os.name == 'posix':
-        windll = ctypes.windll.kernel32
-        return locale.windows_locale[ windll.GetUserDefaultUILanguage() ]
-    else:
-        return os.environ.get('LANG').split('.')[0]
+    if g.user.locale in app.config['LANGUAGES']:
+        return g.user.locale
     header_locale = request.headers.get("locale")
     if header_locale in app.config['LANGUAGES']:
         return header_locale
@@ -64,7 +62,7 @@ def index() -> str:
     if hasattr(g, "user"):
         name = g.user.get('name')
     else:
-        None
+        name = None
     return render_template("5-index.html", username=name)
 
 
