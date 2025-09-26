@@ -51,7 +51,10 @@ def get_locale() -> Optional[str]:
 @app.route("/")
 def index() -> str:
     """Renders a page"""
-    (name := g.user.get('name') if hasattr(g, "user") else None)
+    if hasattr(g, "user"):
+        name = g.user.get('name')
+    else:
+        None
     return render_template("5-index.html", username=name)
 
 
