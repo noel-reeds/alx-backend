@@ -54,7 +54,7 @@ def index() -> str:
     if hasattr(g, "user"):
         name = g.user.get('name')
     else:
-        None
+        name = None
     return render_template("5-index.html", username=name)
 
 
